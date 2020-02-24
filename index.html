@@ -12,43 +12,46 @@
   <li><a href="compare.html">Compare</a></li>
   <li><a href="favourites.html">About</a></li>
 </ul>
-        <center><h1 style="color: #FF6E01;">Statistics and Top 150 Pokemons and Your Favourites !!!</h1></center>
+        <h1 style=" margin-left: 40px;color: #FF6E01;">Statistics and Top 150 Pokemons and Your Favourites !!!</h1>
 
 
     
 
 <div class="row" style="margin-left: 40px;">
-  <div class="column" style="background-color:#ADCECC; padding: 10px;">
+  <div class="column" style="background-color:#2D7C66; padding: 10px;">
  <div style="width: 100%;">
         <h3 style="float:right;">Top 150 Pokemons</h3>
-        <select id="sel" size="15" style="float:right;" onchange="show(this);">
-        <option value="">-- Select a Pokemon to display --</option>
+        <select id="sel" size="15" style="float:right; background-color:#8FF7D8" onchange="show(this);">
+        <option value="">-- Select a Pokemon to display details --</option>
         </select>
    </div>     
   </div>
-  <div class="column" style="background-color:#53D1C8; padding: 10px;">
-        <h3 style="align-content: center;">Details of Pokemon</h3>
+  <div class="column" style="background-color:#040505; padding: 10px; border:5px; border-style: solid; border-color:#ADCECC ">
+        <h3 style="float:right;">Top 150 Pokemons</h3>
         <div style="height: 210px;">
-    <img id="POKO" src="" style="border:2px; border-style: solid;">
-    <p id="msg"></p>
+    <img id="POKO" src="" >
+    <p id="msg" style="color: #ADCECC;"></p>
     </div><br>
-    <button onclick="POKEfavourite()" style="width:100% ; height: 40px; background-color: #905805;">Add this Pokemon to Favourite</button>
+    <br>
+    <br>
+    <button onclick="POKEfavourite()" style="width:100% ; height: 40px; background-color: #FF6E01;"><b>Add this Pokemon to Favourite</b></button>
 
   </div>
-  <div class="column" style="background-color:#ADCECC;">
+  <div class="column" style="background-color:#2D7C66;">
         <h3 style="align-content: center;">Your Favourites!</h3>
 
-        <select id="selF" size="10" style="float:left;" onchange="show(this);">
-        <option value="">-- Select a Pokemon to display favourite--</option>
+        <select id="selF" size="15" style="float:left; background-color:#8FF7D8" onchange="show(this);">
+        <option value="">-- Select Your Favourite to Display --</option>
         </select>
 
   </div>
 </div>
 <br>
+<!--
 <div style="align-items: center;">
- <img src="POKEgroup.jpeg" alt="Pokemon Group" style="width:322px;height:542px;  margin-right: 100px; float:right; background-attachment: fixed;">
+ <img src="POKEgroup.jpeg" alt="Pokemon Group" style="width:322px;height:542px; position:fixed; top:200px; left:1100px;background-attachment: fixed;">
 </div>
-
+-->
 
 
    <script>
@@ -56,7 +59,7 @@
 //    favPokes=localStorage.getItem("someVarKey");
         var ele = document.getElementById('sel');
  
-        async function getISS(){
+        async function getPOKE(){
             for(var i=1;i<151;i++)
             {
             response = await fetch('https://pokeapi.co/api/v2/pokemon/'+i);
@@ -120,7 +123,7 @@ async function show(ele) {
 
 
         
-    getISS();
+    getPOKE();
         
     </script>
      
