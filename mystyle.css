@@ -2,17 +2,30 @@ table {
   margin: 0 auto;
   border-collapse: collapse;
   width: 80%;
-  
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;  
 }
 
-td, th {
-  border: 1px solid #dddddd;
+
+
+td {
+  border: 1px solid #00626B;
   text-align: center;
   padding: 8px;
 }
 
+tr:nth-child(odd) {
+  background-color: #77B7A4;
+}
 tr:nth-child(even) {
-  background-color: #5EA38F;
+  background-color: #9ACEBF;
+}
+
+
+th{
+font-size: 17px;
+border: 1px solid #00626B;
+  background-color: #BC6C1C;
+  padding: 10px;
 }
 
 
