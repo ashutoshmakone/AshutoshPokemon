@@ -6,40 +6,81 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Pokemon Web UI</title>
 </head>
-<body >
+<body>
     <ul>
   <li><a class="active" href="index.html">Top 150</a></li>
   <li><a href="compare.html">Compare</a></li>
   <li><a href="favourites.html">About</a></li>
 </ul>
 
-            <center><h1 style="color: #FF6E01;">Compare Any Two Pokemons !!!</h1></center>
-<div style="width: 600px; float:left; margin-left: 40px;"> 
- <div style="width: 200px; float:left; ">
-        <select id="sel1" size="15">
-        <option value="" selected="selected">-- Select a Pokemon to compare --</option>
+ <h1 style=" margin-left: 40px;color: #FF6E01;">Compare Any Two Pokemons !!!</h1>
+<div class="row" style="margin-left: 40px;">
+
+  <div class="column" style=" background-color:#2D7C66; padding: 10px;height: 260px;">
+ <div style="width: 100%;">
+        <select id="sel1" size="15" style="float:left; background-color:#8FF7D8"">
+        <option value="" selected="selected">-- Select First Pokemon to Compare --</option>
         </select>
    </div>     
-<div style="width: 300px; float:right; ">
-        <select id="sel2" size="15">
-        <option value="" selected="selected">-- Select a Pokemon to compare --</option>
-        
+  </div>
+  <div class="column" style="background-color:#2D7C66; padding: 10px;height: 260px;">
+ <div style="width: 100%;">
+        <select id="sel2" size="15" style="float:right; background-color:#8FF7D8"">
+        <option value="" selected="selected">-- Select second Pokemon to Compare --</option>
         </select>
    </div>     
  </div>
-<div style="width: 600px; float:left; clear: left;">
-  <p id="PID" >Select One Pokemon from Each List to compare</p>
-  <button onclick="POKEcompare()" style="width:100% ; height: 40px; background-color: #905805;">Click me</button>
-
-<br>
-<br>
-<table id="myTable">
+ </div>
+<div class="row" style="margin-left: 40px;">
+  <div class="column2" style="background-color:#2D7C66; padding: 10px; height: 60px;">
+ <div style="width: 100%;">
+<!--  <p id="PID" >Select One Pokemon from Each List to compare</p>    -->
+  <button onclick="POKEcompare();" style="width:100% ; height: 40px; background-color: #905805;">CLICK TO COMPARE</button>
+ </div>
+ </div>
+ </div>
+<div class="row" style="margin-left: 40px;">
+ <div class="column2" style="background-color:#2D7C66; padding: 10px; height: 350px;">
+ <div style="width: 100%;">
+<table id="myTable" style="display: none;">
  <tr>
   <th> </th>
-  <th>Pokemon 1</th>
-  <th>Pokemon 2 </th>
+  <th></th>
+  <th> </th>
+ </tr>
+ <tr>
+  <td><b> Type </b></td>
+  <td> </td>
+  <td> </td>
+ </tr>
+ <tr>
+  <td><b> Abilities </b> </td>
+  <td> </td>
+  <td> </td>
+ </tr>
+ <tr>
+  <td><b> Base Experience </b> </td>
+  <td> </td>
+  <td> </td>
+ </tr>
+ <tr>
+  <td> <b> Height </b></td>
+  <td> </td>
+  <td> </td>
+ </tr>
+ <tr>
+  <td><b> Weight </b> </td>
+  <td> </td>
+  <td> </td>
+ </tr>
+ <tr>
+  <td> Image </td>
+  <td> </td>
+  <td> </td>
  </tr>
 </table>
+ </div>
+ </div>
  </div>
 
 
@@ -47,9 +88,10 @@
         var ele1 = document.getElementById('sel1');
         var ele2 = document.getElementById('sel2');
  
-        async function getISSC(){
+        async function getPOKEC(){
             for(var i=1;i<151;i++)
             {
+             
             response3 = await fetch('https://pokeapi.co/api/v2/pokemon/'+i);
             data3 = await response3.json();
 //            console.log(data.name);
@@ -64,19 +106,23 @@
 
 
       function POKEcompare() {
- //      alert("Button clicked");
+//      alert("Button clicked");
        //          document.getElementById("PID").innerHTML = "Yess you have compared";
+       
         var sl1 = document.getElementById("sel1");
         var sl2 = document.getElementById("sel2");
        var selectedText1 = sl1.options[sl1.selectedIndex].text;
        var selectedText2 = sl2.options[sl2.selectedIndex].text;
        var selectedId1 = sl1.options[sl1.selectedIndex].value;
        var selectedId2 = sl2.options[sl2.selectedIndex].value;
+ 
        
 //           document.getElementById("PID").innerHTML = "Yess you have compared"+selectedId1+"   "+selectedId2;
-          if(selectedText1=="-- Select a Pokemon to compare --" || selectedText2=="-- Select a Pokemon to compare --")
+          if(selectedText1=="-- Select First Pokemon to Compare --" || selectedText2=="-- Select second Pokemon to Compare --")
           {
-//            alert("Please select one Pokemon from each list to compare");
+            var table = document.getElementById('myTable');
+            table.style.display="none";
+            alert("Please select one Pokemon from each list to compare");
                       
           } else{
            
@@ -88,7 +134,12 @@
         async function showCompare(s1,s2)
         {
    //         alert("Good Job"+s1+s2); 
+
+  
+
             var table = document.getElementById('myTable');
+            table.style.display="block";
+            
             response4 = await fetch('https://pokeapi.co/api/v2/pokemon/'+s1);
             data4 = await response4.json();
             console.log(data4.name);
@@ -97,30 +148,29 @@
             data5 = await response5.json();
             console.log(data5.name);
             
-            document.getElementById("myTable").rows[0].cells[1].innerHTML=data4.name
-            document.getElementById("myTable").rows[0].cells[2].innerHTML=data5.name
+            table.rows[0].cells[1].innerHTML=data4.name;
+            table.rows[0].cells[2].innerHTML=data5.name;
             
             var POKtype4="";
             var POKtype5="";
             for (var j = 0; j < data4.types.length; j++) {
             POKtype4=POKtype4 + data4.types[j].type.name;
             if(j != data4.types.length-1)
-            POKtype4=POKtype4 + ", ";
+            {
+             POKtype4=POKtype4 + ", ";
+            }
             }
             for (j = 0; j < data5.types.length; j++) {
             POKtype5=POKtype5 + data5.types[j].type.name;
             if(j != data5.types.length-1)
-            POKtype5=POKtype5 + ", ";
+            {
+             POKtype5=POKtype5 + ", ";
+            }
             }
 
+            table.rows[1].cells[1].innerHTML=POKtype4;
+            table.rows[1].cells[2].innerHTML=POKtype5;
             
-           var row = table.insertRow(-1);
-           var cell0 = row.insertCell(0);
-           var cell1 = row.insertCell(1); 
-           var cell2 = row.insertCell(2);
-           cell0.innerHTML = "<b>Type";
-           cell1.innerHTML = POKtype4;
-           cell2.innerHTML = POKtype5;
 
             var POKabi4="";
             for (var k = 0; k < data4.abilities.length; k++) {
@@ -136,58 +186,37 @@
             POKabi5=POKabi5 + ", ";
             }
 
-           var row2 = table.insertRow(-1);
-           cell0 = row2.insertCell(0);
-           cell1 = row2.insertCell(1); 
-           cell2 = row2.insertCell(2);
-           cell0.innerHTML = "<b>Abilities";
-           cell1.innerHTML = POKabi4;
-           cell2.innerHTML = POKabi5;
+            table.rows[2].cells[1].innerHTML=POKabi4;
+            table.rows[2].cells[2].innerHTML=POKabi5;
            
            var POKbaseEXP4=data4.base_experience;
            var POKbaseEXP5=data5.base_experience;
 
-           var row3 = table.insertRow(-1);
-           cell0 = row3.insertCell(0);
-           cell1 = row3.insertCell(1); 
-           cell2 = row3.insertCell(2);
-           cell0.innerHTML = "<b>Base Experience";
-           cell1.innerHTML = POKbaseEXP4;
-           cell2.innerHTML = POKbaseEXP5;
-           
+            table.rows[3].cells[1].innerHTML=POKbaseEXP4;
+            table.rows[3].cells[2].innerHTML=POKbaseEXP5;
+          
            var POKheight4=data4.height;
            var POKheight5=data5.height;
 
-           var row4 = table.insertRow(-1);
-           cell0 = row4.insertCell(0);
-           cell1 = row4.insertCell(1); 
-           cell2 = row4.insertCell(2);
-           cell0.innerHTML = "<b>Height";
-           cell1.innerHTML = POKheight4;
-           cell2.innerHTML = POKheight5;
+            table.rows[4].cells[1].innerHTML=POKheight4;
+            table.rows[4].cells[2].innerHTML=POKheight5;
 
            var POKweight4=data4.weight;
            var POKweight5=data5.weight;
 
-           var row5 = table.insertRow(-1);
-           cell0 = row5.insertCell(0);
-           cell1 = row5.insertCell(1); 
-           cell2 = row5.insertCell(2);
-           cell0.innerHTML = "<b>Weight";
-           cell1.innerHTML = POKweight4;
-           cell2.innerHTML = POKweight5;
+            table.rows[5].cells[1].innerHTML=POKweight4;
+            table.rows[5].cells[2].innerHTML=POKweight5;
 
 
            
            var POKimg4=data4.sprites.front_default;
            var POKimg5=data5.sprites.front_default;
-           var row6 = table.insertRow(-1);
-           cell0 = row6.insertCell(0);
-           cell1 = row6.insertCell(1); 
-           cell2 = row6.insertCell(2);
-           cell0.innerHTML = "<b>Image";
-           cell1.innerHTML = cell1.innerHTML + '<td><img src="'+POKimg4+'"></img></td>';
-           cell2.innerHTML = cell2.innerHTML + '<td><img src="'+POKimg5+'"></img></td>';
+
+            table.rows[6].cells[1].innerHTML="";
+            table.rows[6].cells[2].innerHTML="";
+
+           table.rows[6].cells[1].innerHTML = table.rows[6].cells[1].innerHTML + '<td><img src="'+POKimg4+'"></img></td>';
+           table.rows[6].cells[2].innerHTML = table.rows[6].cells[2].innerHTML + '<td><img src="'+POKimg5+'"></img></td>';
 //           cell2.innerHTML = POKweight5;
 
            
@@ -195,7 +224,7 @@
         }
 
 
-    getISSC();
+    getPOKEC();
 
      
         

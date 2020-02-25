@@ -1,19 +1,30 @@
-table, td {
-  border: 1px solid black;
-    align-content: center;
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+  
+}
 
-}
-td,th{
-  width:200px;
-  height:30px;
+td, th {
+  border: 1px solid #dddddd;
   text-align: center;
+  padding: 8px;
 }
+
+tr:nth-child(even) {
+  background-color: #5EA38F;
+}
+
+
 body{
   background-color: #00626B;
+  padding: 20px 40px;
+  background-image: url("ALLpoke5.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
-img:hover {
+img {
   animation: shake 1s;
   animation-iteration-count: infinite;
 }
@@ -38,13 +49,12 @@ ul {
   margin: 20px 40px;
   padding: 0;
   overflow: hidden;
-  background-color: #8748BB;
+  background-color: #8FF7D8;
   }
 
 li {
   float: left;
-  border:2px;
-  border-style: solid;
+  font-weight: bold;
 }
 
 li a {
@@ -55,13 +65,10 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
-  background-color: #605D5D;
+li a:hover {
+  background-color: #2D7C66;
 }
 
-.active {
-  background-color: #4CAF50;
-}
 
 
 * {
@@ -71,9 +78,18 @@ li a:hover:not(.active) {
 /* Create four equal columns that floats next to each other */
 .column {
   float: left;
-  width: 20%;
+  width:300px;
   padding: 10px;
   height: 350px; /* Should be removed. Only for demonstration */
+  float: left
+}
+
+.column2 {
+  float: left;
+  width: 600px;
+  padding: 10px;
+  height: 150px; /* Should be removed. Only for demonstration */
+  float: left
 }
 
 /* Clear floats after the columns */
