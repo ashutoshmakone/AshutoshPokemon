@@ -1,7 +1,8 @@
     var favPokes = [];
 //    favPokes=localStorage.getItem("someVarKey");
         var ele = document.getElementById('sel');
- 
+ //       ele.style.display = "none";
+       
         async function getPOKE(){
             for(var i=1;i<151;i++)
             {
@@ -10,6 +11,7 @@
 //            console.log(data.name);
             ele.innerHTML = ele.innerHTML +  "<option value=" + data.id + ">" +data.id+" : "+ data.name + "</option>";
             }
+//        ele.style.display = "block";
         }
         
 async function POKEfavourite() {
@@ -66,6 +68,7 @@ async function show(ele) {
         var msg = document.getElementById('msg');
         msg.innerHTML = 'Selected Pokemon: <b>' + data1.name + '</b> </br>' +
             'ID: <b>' + data1.id + '</b></br>'+'Type: <b>'+ POKtype+ '</b></br>'+'Abilities: <b>'+ POKabi+ '</b>';
+            
     }        
 
 
